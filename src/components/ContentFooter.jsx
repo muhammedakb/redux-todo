@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   changeActiveFilter,
@@ -11,6 +12,11 @@ function ContentFooter() {
   const itemsLeft = items.filter(({ completed }) => !completed).length;
 
   const activeFilter = useSelector((state) => state.todos.activeFilter);
+
+  useEffect(() => {
+    localStorage.setItem("activeFilter", activeFilter);
+  }, [activeFilter]);
+
   return (
     <footer className="footer">
       <span className="todo-count">
